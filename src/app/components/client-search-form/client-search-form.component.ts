@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ClientSearchService } from '../../service/clientSearch.service';
 import { Client } from '../../model/client.model';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 
 @Component({
   selector: 'app-client-search-form',
@@ -16,7 +16,7 @@ export default class ClientSearchFormComponent {
   client: Client | null = null;
   error: string | null = null;
 
-  constructor(private fb: FormBuilder, private clientSearchService: ClientSearchService) {
+  constructor(private fb: FormBuilder,private router: Router, private clientSearchService: ClientSearchService) {
     this.clientSearchForm = this.fb.group({
       documentType: ['', Validators.required],
       documentNumber: ['', Validators.required]
@@ -38,6 +38,10 @@ export default class ClientSearchFormComponent {
       (data) => {
         this.client = data;
         this.error = null;
+        sessionStorage.setItem('documentType', documentType);
+        sessionStorage.setItem('documentNumber', documentNumber);
+        sessionStorage.setItem('clientData', JSON.stringify(data));
+        this.router.navigate(['/client-details']);
         console.log('Client found:', data);
       },
       (error) => {
