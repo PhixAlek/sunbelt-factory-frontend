@@ -1,0 +1,38 @@
+<section class="container">
+  <form [formGroup]="clientSearchForm" class="form" (ngSubmit)="searchClient()">
+    <h2>Búsqueda de Cliente</h2>
+    <section class="form-group">
+      <label for="documentType">Tipo de identificación:</label>
+      <select class="form-control" id="documentType" formControlName="documentType"
+        [class.is-invalid]="isFieldInvalid('documentType')">
+        <option value="">Seleccione el tipo</option>
+        <option value="C">Cédula de Ciudadanía</option>
+        <option value="P">Pasaporte</option>
+      </select>
+      @if (isFieldInvalid('documentType')) {
+        <div class="alert-danger">
+          Tipo de identificación es requerido.
+        </div>
+      }
+    </section>
+    <section class="form-group">
+      <label for="documentNumber">Número de identificación:</label>
+      <input class="form-control" id="documentNumber" formControlName="documentNumber" placeholder="Ingrese número"
+        [class.is-invalid]="isFieldInvalid('documentNumber')">
+      @if (isFieldInvalid('documentNumber')) {
+        <div class="alert-danger">
+          Número de identificación es requerido.
+        </div>
+      }
+    </section>
+    <section class="btn-container">
+      <button type="submit" class="btn btn-primary">Buscar</button>
+    </section>
+  </form>
+  @if (error) {
+    <div class="alert alert-danger">{{ error }}</div>
+  }
+  @if (client) {
+    <!-- Aquí puedes mostrar la información del cliente -->
+  }
+</section>
