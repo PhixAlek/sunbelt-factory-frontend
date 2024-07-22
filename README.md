@@ -25,3 +25,31 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+# Frontend: Customer Search Application
+
+Este proyecto es una aplicación frontend para buscar información de clientes. Está construido con Angular 17.
+
+
+## Estructura del Proyecto
+
+```plaintext
+src/
+|-- app/
+|   |-- components/
+|   |   |-- client-search-form/
+|   |   |   |-- client-search-form.component.ts
+|   |   |   |-- client-search-form.component.html
+|   |   |   |-- client-search-form.component.css
+|   |   |-- client-interface/
+|   |   |   |-- client-interface.component.ts
+|   |   |   |-- client-interface.component.html
+|   |   |   |-- client-interface.component.css
+|   |   |-- client-not-found-error-popup/
+|   |   |   |-- client-not-found-error-popup.component.ts
+|   |   |   |-- client-not-found-error-popup.component.html
+|   |   |   |-- client-not-found-error-popup.component.css
+|   |-- model/
+|   |   |-- client.model.ts
+|   |-- service/
+|   |   |-- client.service.ts
