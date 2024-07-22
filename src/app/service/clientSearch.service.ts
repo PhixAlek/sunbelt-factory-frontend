@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpErrorResponse  } from '@angular/common/http';
-import { Observable, of} from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { Client } from '../model/client.model';
 
@@ -9,8 +9,9 @@ import { Client } from '../model/client.model';
   providedIn: 'root'
 })
 export class ClientSearchService {
+  private port=8090;
 
-  private apiUrl = 'http://localhost:8080/api/customers/find';
+  private apiUrl = `http://localhost:${this.port}/api/customers/find`;
 
   constructor(private http: HttpClient) {}
 
@@ -21,15 +22,10 @@ export class ClientSearchService {
 
     return this.http.post<Client>(this.apiUrl, null, { params }).pipe(
       tap((data: Client | null) => {
-        console.log('Request parameters:', { documentType, documentNumber });
-        console.log('Received response:', data);
       }),
       catchError((error: HttpErrorResponse) => {
-        console.error('An error occurred:', error.message);
-        console.error('Status code:', error.status);
-        console.error('Status text:', error.statusText);
-        console.error('URL:', error.url);
-        return of(null); // Retorna un observable vacío en caso de error
+          console.error('An error occurred:', error.message);
+          return throwError(() => error); // Returns an empty observable in case of error
       })
     );
   }
