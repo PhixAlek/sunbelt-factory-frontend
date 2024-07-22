@@ -1,0 +1,38 @@
+@if (client) {
+<section class="container">
+  <section class="btn-container">
+    <button (click)="goBackAndClearStorage()">Atrás</button>
+  </section>
+    <div class="client-details">
+      <h2>Detalles del Cliente</h2>
+      <section class="client-info-group">
+        <div class="client-info">
+          <label for="documentNumber">{{ getDocumentTypeText(documentType) }}</label>
+          <span id="documentNumber">{{ documentNumber }}</span>
+        </div>
+        <div class="client-info">
+          <label for="fullName">Nombre completo:</label>
+          <span id="fullName">{{ fullName }}</span>
+        </div>
+      </section>
+
+      <section class="client-info-group">
+        <div class="client-info">
+          <label for="phone">Teléfono:</label>
+          <span id="phone">{{ client.phone }}</span>
+        </div>
+        <div class="client-info">
+          <label for="city">Ciudad:</label>
+          <span id="city">{{ client.city }}</span>
+        </div>
+      </section>
+
+      <section class="client-info full-width">
+        <label for="address">Dirección:</label>
+        <span id="address">{{ client.address }}</span>
+      </section>
+    </div>
+</section>
+} @else {
+<div class="alert alert-danger">{{ error }}</div>
+}

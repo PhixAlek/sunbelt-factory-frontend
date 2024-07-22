@@ -1,4 +1,41 @@
 <section class="container">
+
+  <!-- Error Popups -->
+
+  @if (notFoundError) {
+  <div class="popup">
+    <div class="popup-content">
+      <div class="popup-header">
+        <span class="close-btn" (click)="closePopup()">&times;</span>
+      </div>
+      <div class="popup-body">
+        <div class="icon-container">
+          <img src="../../../assets/info.png" alt="Not Found Icon">
+        </div>
+        <h2>No se encontró el cliente</h2>
+        <p>Los datos recuperados no coinciden con los criterios de búsqueda.</p>
+      </div>
+    </div>
+  </div>
+  }
+  @if (serverError) {
+  <div class="popup">
+    <div class="popup-content">
+      <div class="popup-header">
+        <span class="close-btn" (click)="closePopup()">&times;</span>
+      </div>
+      <div class="popup-body">
+        <div class="icon-container">
+          <img src="../../../assets/error.png" alt="Connection Error Icon">
+        </div>
+        <h2>Error de conexión</h2>
+        <p>No se pudo establecer una conexión con el servidor. Verifica tu conexión a internet y vuelve a intentarlo.
+          {{error}}
+        </p>
+      </div>
+    </div>
+  </div>
+  }
   <form [formGroup]="clientSearchForm" class="form" (ngSubmit)="searchClient()">
     <h2>Búsqueda de Cliente</h2>
     <section class="form-group">
@@ -10,9 +47,9 @@
         <option value="P">Pasaporte</option>
       </select>
       @if (isFieldInvalid('documentType')) {
-        <div class="alert-danger">
-          Tipo de identificación es requerido.
-        </div>
+      <div class="alert-danger">
+        Tipo de identificación es requerido.
+      </div>
       }
     </section>
     <section class="form-group">
@@ -20,19 +57,13 @@
       <input class="form-control" id="documentNumber" formControlName="documentNumber" placeholder="Ingrese número"
         [class.is-invalid]="isFieldInvalid('documentNumber')">
       @if (isFieldInvalid('documentNumber')) {
-        <div class="alert-danger">
-          Número de identificación es requerido.
-        </div>
+      <div class="alert-danger">
+        Número de identificación es requerido.
+      </div>
       }
     </section>
     <section class="btn-container">
       <button type="submit" class="btn btn-primary">Buscar</button>
     </section>
   </form>
-  @if (error) {
-    <div class="alert alert-danger">{{ error }}</div>
-  }
-  @if (client) {
-    <!-- Aquí puedes mostrar la información del cliente -->
-  }
 </section>
